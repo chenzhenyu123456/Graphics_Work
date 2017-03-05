@@ -1,10 +1,10 @@
 
-// Graphics_WorkView.cpp : CGraphics_WorkView ÀàµÄÊµÏÖ
+// Graphics_WorkView.cpp : CGraphics_WorkView ç±»çš„å®ç°
 //
 
 #include "stdafx.h"
-// SHARED_HANDLERS ¿ÉÒÔÔÚÊµÏÖÔ¤ÀÀ¡¢ËõÂÔÍ¼ºÍËÑË÷É¸Ñ¡Æ÷¾ä±úµÄ
-// ATL ÏîÄ¿ÖĞ½øĞĞ¶¨Òå£¬²¢ÔÊĞíÓë¸ÃÏîÄ¿¹²ÏíÎÄµµ´úÂë¡£
+// SHARED_HANDLERS å¯ä»¥åœ¨å®ç°é¢„è§ˆã€ç¼©ç•¥å›¾å’Œæœç´¢ç­›é€‰å™¨å¥æŸ„çš„
+// ATL é¡¹ç›®ä¸­è¿›è¡Œå®šä¹‰ï¼Œå¹¶å…è®¸ä¸è¯¥é¡¹ç›®å…±äº«æ–‡æ¡£ä»£ç ã€‚
 #ifndef SHARED_HANDLERS
 #include "Graphics_Work.h"
 #endif
@@ -23,7 +23,7 @@
 IMPLEMENT_DYNCREATE(CGraphics_WorkView, CView)
 
 BEGIN_MESSAGE_MAP(CGraphics_WorkView, CView)
-	// ±ê×¼´òÓ¡ÃüÁî
+	// æ ‡å‡†æ‰“å°å‘½ä»¤
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
@@ -80,11 +80,11 @@ int Operator = 6;
 extern bool start;
 
 int Draw_Operator[100000], Stack_top = 0;
-// CGraphics_WorkView ¹¹Ôì/Îö¹¹
+// CGraphics_WorkView æ„é€ /ææ„
 
 CGraphics_WorkView::CGraphics_WorkView()
 {
-	// TODO:  ÔÚ´Ë´¦Ìí¼Ó¹¹Ôì´úÂë
+	// TODO:  åœ¨æ­¤å¤„æ·»åŠ æ„é€ ä»£ç 
 	Case = 0;
 
 }
@@ -95,13 +95,13 @@ CGraphics_WorkView::~CGraphics_WorkView()
 
 BOOL CGraphics_WorkView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO:  ÔÚ´Ë´¦Í¨¹ıĞŞ¸Ä
-	//  CREATESTRUCT cs À´ĞŞ¸Ä´°¿ÚÀà»òÑùÊ½
+	// TODO:  åœ¨æ­¤å¤„é€šè¿‡ä¿®æ”¹
+	//  CREATESTRUCT cs æ¥ä¿®æ”¹çª—å£ç±»æˆ–æ ·å¼
 	cs.style |= WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
 	return CView::PreCreateWindow(cs);
 }
 
-// CGraphics_WorkView »æÖÆ
+// CGraphics_WorkView ç»˜åˆ¶
 
 void CGraphics_WorkView::OnDraw(CDC* /*pDC*/)
 {
@@ -109,40 +109,40 @@ void CGraphics_WorkView::OnDraw(CDC* /*pDC*/)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-	// TODO:  ÔÚ´Ë´¦Îª±¾»úÊı¾İÌí¼Ó»æÖÆ´úÂë
+	// TODO:  åœ¨æ­¤å¤„ä¸ºæœ¬æœºæ•°æ®æ·»åŠ ç»˜åˆ¶ä»£ç 
 
-	// Çå³ıÑÕÉ«  
+	// æ¸…é™¤é¢œè‰²  
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	// »æÖÆ³¡¾°  
+	// ç»˜åˆ¶åœºæ™¯  
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	DrawPicture();
 	glPopMatrix();
-	// ½»»»»º³åÇø  
+	// äº¤æ¢ç¼“å†²åŒº  
 	SwapBuffers(wglGetCurrentDC());
 }
 
 
-// CGraphics_WorkView ´òÓ¡
+// CGraphics_WorkView æ‰“å°
 
 BOOL CGraphics_WorkView::OnPreparePrinting(CPrintInfo* pInfo)
 {
-	// Ä¬ÈÏ×¼±¸
+	// é»˜è®¤å‡†å¤‡
 	return DoPreparePrinting(pInfo);
 }
 
 void CGraphics_WorkView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO:  Ìí¼Ó¶îÍâµÄ´òÓ¡Ç°½øĞĞµÄ³õÊ¼»¯¹ı³Ì
+	// TODO:  æ·»åŠ é¢å¤–çš„æ‰“å°å‰è¿›è¡Œçš„åˆå§‹åŒ–è¿‡ç¨‹
 }
 
 void CGraphics_WorkView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO:  Ìí¼Ó´òÓ¡ºó½øĞĞµÄÇåÀí¹ı³Ì
+	// TODO:  æ·»åŠ æ‰“å°åè¿›è¡Œçš„æ¸…ç†è¿‡ç¨‹
 }
 
 
-// CGraphics_WorkView Õï¶Ï
+// CGraphics_WorkView è¯Šæ–­
 
 #ifdef _DEBUG
 void CGraphics_WorkView::AssertValid() const
@@ -155,7 +155,7 @@ void CGraphics_WorkView::Dump(CDumpContext& dc) const
 	CView::Dump(dc);
 }
 
-CGraphics_WorkDoc* CGraphics_WorkView::GetDocument() const // ·Çµ÷ÊÔ°æ±¾ÊÇÄÚÁªµÄ
+CGraphics_WorkDoc* CGraphics_WorkView::GetDocument() const // éè°ƒè¯•ç‰ˆæœ¬æ˜¯å†…è”çš„
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CGraphics_WorkDoc)));
 	return (CGraphics_WorkDoc*)m_pDocument;
@@ -163,21 +163,21 @@ CGraphics_WorkDoc* CGraphics_WorkView::GetDocument() const // ·Çµ÷ÊÔ°æ±¾ÊÇÄÚÁªµÄ
 #endif //_DEBUG
 
 
-// CGraphics_WorkView ÏûÏ¢´¦Àí³ÌĞò
+// CGraphics_WorkView æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 
 int CGraphics_WorkView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CView::OnCreate(lpCreateStruct) == -1)
 		return -1;
-	// TODO:  ÔÚ´ËÌí¼ÓÄú×¨ÓÃµÄ´´½¨´úÂë
-	// ´´½¨DC  
+	// TODO:  åœ¨æ­¤æ·»åŠ æ‚¨ä¸“ç”¨çš„åˆ›å»ºä»£ç 
+	// åˆ›å»ºDC  
 
 	m_pDC = new CClientDC(this);
 	ASSERT(m_pDC != NULL);
-	// Ñ¡ÔñÏñËØ¸ñÊ½  
+	// é€‰æ‹©åƒç´ æ ¼å¼  
 	if (!bSetDCPixelFormat()) return -1;
-	// ´´½¨äÖÈ¾»·¾³, ²¢Ê¹Ëü³ÉÎªµ±Ç°äÖÈ¾»·¾³  
+	// åˆ›å»ºæ¸²æŸ“ç¯å¢ƒ, å¹¶ä½¿å®ƒæˆä¸ºå½“å‰æ¸²æŸ“ç¯å¢ƒ  
 	m_hRC = wglCreateContext(m_pDC->GetSafeHdc());
 	wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);
 	return 0;
@@ -188,8 +188,8 @@ void CGraphics_WorkView::OnDestroy()
 {
 	CView::OnDestroy();
 
-	// TODO:  ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
-	// ÊÍ·Å×ÊÔ´  
+	// TODO:  åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
+	// é‡Šæ”¾èµ„æº  
 	wglMakeCurrent(NULL, NULL);
 	wglDeleteContext(m_hRC);
 	delete m_pDC;
@@ -200,14 +200,14 @@ void CGraphics_WorkView::OnSize(UINT nType, int cx, int cy)
 {
 	CView::OnSize(nType, cx, cy);
 
-	// TODO:  ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
-	// ÉèÖÃÊÓ¿Ú  
+	// TODO:  åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
+	// è®¾ç½®è§†å£  
 	/*glViewport(0, 0, cx, cy);
-	// ÉèÖÃÍ¶Ó°¾ØÕó(Í¸ÊÓÍ¶Ó°)  
+	// è®¾ç½®æŠ•å½±çŸ©é˜µ(é€è§†æŠ•å½±)  
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(60.0, (GLfloat)cx / (GLfloat)cy, 1.0, 1000.0);
-	// ÉèÖÃÄ£ĞÍÊÓÍ¼¾ØÕó  
+	// è®¾ç½®æ¨¡å‹è§†å›¾çŸ©é˜µ  
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); */
@@ -218,37 +218,44 @@ void CGraphics_WorkView::OnInitialUpdate()
 {
 	CView::OnInitialUpdate();
 
-	// TODO:  ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+	// TODO:  åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
 	// glClearColor(0, 0, 0, 1);
 }
 
 
-bool CGraphics_WorkView::bSetDCPixelFormat() {
-	// ÉèÖÃÏñËØ¸ñÊ½  
+bool CGraphics_WorkView::bSetDCPixelFormat()
+{
 	static PIXELFORMATDESCRIPTOR pfd =
 	{
-		sizeof(PIXELFORMATDESCRIPTOR), // ½á¹¹µÄ´óĞ¡  
-		1, // ½á¹¹µÄ°æ±¾  
-		PFD_DRAW_TO_WINDOW | // ÔÚ´°¿Ú(¶ø²»ÊÇÎ»Í¼)ÖĞ»æÍ¼  
-		PFD_SUPPORT_OPENGL | // Ö§³ÖÔÚ´°¿ÚÖĞ½øĞĞOpenGLµ÷ÓÃ  
-		PFD_DOUBLEBUFFER, // Ë«»º³åÄ£Ê½  
-		PFD_TYPE_RGBA, // RGBAÑÕÉ«Ä£Ê½  
-		32, // ĞèÒª32Î»ÑÕÉ«  
-		0, 0, 0, 0, 0, 0, // ²»ÓÃÓÚÑ¡ÔñÄ£Ê½  
-		0, 0, // ²»ÓÃÓÚÑ¡ÔñÄ£Ê½  
-		0, 0, 0, 0, 0, // ²»ÓÃÓÚÑ¡ÔñÄ£Ê½  
-		16, // Éî¶È»º³åÇøµÄ´óĞ¡  
-		0, // ÔÚ´Ë²»Ê¹ÓÃ  
-		0, // ÔÚ´Ë²»Ê¹ÓÃ  
-		0, // ÔÚ´Ë²»Ê¹ÓÃ  
-		0, // ÔÚ´Ë²»Ê¹ÓÃ  
-		0, 0, 0 // ÔÚ´Ë²»Ê¹ÓÃ  
+		sizeof(PIXELFORMATDESCRIPTOR), // ç»“æ„çš„å¤§å°  
+		1, // ç»“æ„çš„ç‰ˆæœ¬  
+		PFD_DRAW_TO_WINDOW | // åœ¨çª—å£(è€Œä¸æ˜¯ä½å›¾)ä¸­ç»˜å›¾  
+		PFD_SUPPORT_OPENGL | // æ”¯æŒåœ¨çª—å£ä¸­è¿›è¡ŒOpenGLè°ƒç”¨  
+		PFD_DOUBLEBUFFER, // åŒç¼“å†²æ¨¡å¼  
+		PFD_TYPE_RGBA, // RGBAé¢œè‰²æ¨¡å¼  
+		32, // éœ€è¦32ä½é¢œè‰²  
+		0, 0, 0, 0, 0, 0, // ä¸ç”¨äºé€‰æ‹©æ¨¡å¼  
+		0, 0, // ä¸ç”¨äºé€‰æ‹©æ¨¡å¼  
+		0, 0, 0, 0, 0, // ä¸ç”¨äºé€‰æ‹©æ¨¡å¼  
+		16, // æ·±åº¦ç¼“å†²åŒºçš„å¤§å°  
+		0, // åœ¨æ­¤ä¸ä½¿ç”¨  
+		0, // åœ¨æ­¤ä¸ä½¿ç”¨  
+		0, // åœ¨æ­¤ä¸ä½¿ç”¨  
+		0, // åœ¨æ­¤ä¸ä½¿ç”¨  
+		0, 0, 0 // åœ¨æ­¤ä¸ä½¿ç”¨  
 	};
-	// Ñ¡ÔñÒ»ÖÖÓëpfdËùÃèÊöµÄ×îÆ¥ÅäµÄÏñËØ¸ñÊ½  
-	int nPixelFormat = ChoosePixelFormat(m_pDC->GetSafeHdc(), &pfd);
-	if (0 == nPixelFormat) return false;
-	// ÎªÉè±¸»·¾³ÉèÖÃÏñËØ¸ñÊ½  
-	return SetPixelFormat(m_pDC->GetSafeHdc(), nPixelFormat, &pfd);
+	// é€‰æ‹©ä¸€ç§ä¸pfdæ‰€æè¿°çš„æœ€åŒ¹é…çš„åƒç´ æ ¼å¼  
+	// ä¸ºè®¾å¤‡ç¯å¢ƒè®¾ç½®åƒç´ æ ¼å¼  
+	int pixelformat;
+	if ((pixelformat = ChoosePixelFormat(m_pDC->GetSafeHdc(), &pfd)) == 0) {
+		MessageBox(_T("ChoosePixelFormat failed"));
+		return FALSE;
+	}
+	if (SetPixelFormat(m_pDC->GetSafeHdc(), pixelformat, &pfd) == FALSE) {
+		MessageBox(_T("SetPixelFormat failed"));
+		return FALSE;
+	}
+	return TRUE;
 }
 
 OneOne m_oneone; // 1
@@ -285,7 +292,7 @@ Eraser m_eraser;
 
 REDO_STACK m_redo;
 
-// ½«»æÖÆµÄÍ¼ĞÎ·Ö¶Î£¬ÓÃvector±£´æ£¬¼ÇÂ¼Ã¿¶ÎµÄÖÕµã
+// å°†ç»˜åˆ¶çš„å›¾å½¢åˆ†æ®µï¼Œç”¨vectorä¿å­˜ï¼Œè®°å½•æ¯æ®µçš„ç»ˆç‚¹
 vector<int> mark_line;
 vector<int> mark_triangle;
 vector<int> mark_rectangle;
@@ -298,14 +305,14 @@ int mark_id[100000];
 double Move_x, Move_y, Move_z;
 void CGraphics_WorkView::DrawPicture()
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	CRect rc; GetWindowRect(&rc);
 	int cx = rc.Width(); int cy = rc.Height();
 	int ID;
 	if (Case == 0) {
 		if (Stack_top > 0) {
 			Clear(); m_draw.Init(); m_draw.Reshape(cx, cy);
-			// ´ò±ê¼Ç£¬Î¬»¤»æÍ¼µÄÏÈºó´ÎĞò
+			// æ‰“æ ‡è®°ï¼Œç»´æŠ¤ç»˜å›¾çš„å…ˆåæ¬¡åº
 			for (int i = 0; i < Stack_top; i++) {
 				ID = mark_id[i];
 				switch (Draw_Operator[i]) {
@@ -568,63 +575,63 @@ void CGraphics_WorkView::DrawPicture()
 }
 void CGraphics_WorkView::OnOneOne() 
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 1; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnOneTwo() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 2; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnOneThreeOne() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 3; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnOneThreeTwo() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 4; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnTwoOne() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 5; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnTwoTwo()
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 6; ClearMove();
-	MessageBox(_T("  ÇëÑ¡ÔñÖ±ÏßÓëµãµÄÑÕÉ«"), _T("ÌáÊ¾"));
+	MessageBox(_T("  è¯·é€‰æ‹©ç›´çº¿ä¸ç‚¹çš„é¢œè‰²"), _T("æç¤º"));
 	COLORREF color = RGB(255, 0, 0);
 	CColorDialog colorDlg(color);
 	if (IDOK == colorDlg.DoModal()) {
-		// »ñÈ¡ÑÕÉ«¶Ô»°¿òÖĞÑ¡ÔñµÄÑÕÉ«Öµ
+		// è·å–é¢œè‰²å¯¹è¯æ¡†ä¸­é€‰æ‹©çš„é¢œè‰²å€¼
 		color = colorDlg.GetColor();
-		// »ñÈ¡R¡¢G¡¢B·ÖÁ¿
+		// è·å–Rã€Gã€Båˆ†é‡
 		m_twotwo.R = GetRValue(color);
 		m_twotwo.G = GetGValue(color);
 		m_twotwo.B = GetBValue(color);
 	}
 	InvalidateRect(NULL, FALSE);
 	/*CDialog* dlg = new CDialog;
-	dlg->Create(MAKEINTRESOURCE(IDD_DIALOG1)); // ¶Ô»°¿òID
+	dlg->Create(MAKEINTRESOURCE(IDD_DIALOG1)); // å¯¹è¯æ¡†ID
 	dlg->ShowWindow(1);
 	m_twothree.op = Operator;*/
 }
 
 void CGraphics_WorkView::OnTwoThree() { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	CChooseDialog dlg;
 	dlg.DoModal();
 	if (start) {
@@ -634,105 +641,105 @@ void CGraphics_WorkView::OnTwoThree() {
 }
 void CGraphics_WorkView::OnThreeOneOne() 
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 8; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnThreeOneTwo() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 9; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnThreeTwo() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 10; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnThreeThreeOne() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 11; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnThreeThreeTwo() 
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 12; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnFourOne() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 13; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnFourTwo() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 14; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnFourThree() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 15;	ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnFiveOne() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 16; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnFiveTwo() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 17; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnFiveThreeOne() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 18; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnFiveThreeTwo() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 19; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnSixOne() 
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 20; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnSixTwo() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 21; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
 
 void CGraphics_WorkView::OnSixThree() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Case = 22; ClearMove(); 
 	InvalidateRect(NULL, FALSE); 
 }
@@ -740,14 +747,14 @@ void CGraphics_WorkView::OnSixThree()
 //stack<int> COLOR;
 void CGraphics_WorkView::OnDrawColor()
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
-	// MessageBox(_T("  ÇëÑ¡Ôñ»­±ÊµÄÑÕÉ«"), _T("ÌáÊ¾"));
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
+	// MessageBox(_T("  è¯·é€‰æ‹©ç”»ç¬”çš„é¢œè‰²"), _T("æç¤º"));
 	COLORREF color = RGB(255, 0, 0);
 	CColorDialog colorDlg(color);
 	if (IDOK == colorDlg.DoModal()) {
-		// »ñÈ¡ÑÕÉ«¶Ô»°¿òÖĞÑ¡ÔñµÄÑÕÉ«Öµ
+		// è·å–é¢œè‰²å¯¹è¯æ¡†ä¸­é€‰æ‹©çš„é¢œè‰²å€¼
 		color = colorDlg.GetColor();
-		// »ñÈ¡R¡¢G¡¢B·ÖÁ¿
+		// è·å–Rã€Gã€Båˆ†é‡
 		m_rectangle.R = m_line.R = m_freeline.R = m_draw.R = m_cycle.R = m_triangle.R
 			= GetRValue(color);
 		m_rectangle.G = m_line.G = m_freeline.G = m_draw.G = m_cycle.G = m_triangle.G
@@ -760,7 +767,7 @@ void CGraphics_WorkView::OnDrawColor()
 
 void CGraphics_WorkView::OnDrawLine() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	mark_line.push_back(0);
 	mark_id[Stack_top] = (int)mark_line.size() - 1;
 	Case = 0; Draw_Operator[Stack_top++] = 1; 
@@ -769,7 +776,7 @@ void CGraphics_WorkView::OnDrawLine()
 
 void CGraphics_WorkView::OnDrawTriangle() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	mark_triangle.push_back(0);
 	mark_id[Stack_top] = (int)mark_triangle.size() - 1;
 	Case = 0; Draw_Operator[Stack_top++] = 2; 
@@ -778,7 +785,7 @@ void CGraphics_WorkView::OnDrawTriangle()
 
 void CGraphics_WorkView::OnDrawRectangle() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	mark_rectangle.push_back(0);
 	mark_id[Stack_top] = (int)mark_rectangle.size() - 1;
 	Case = 0; Draw_Operator[Stack_top++] = 3; 
@@ -787,7 +794,7 @@ void CGraphics_WorkView::OnDrawRectangle()
 
 void CGraphics_WorkView::OnDrawCycle() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	mark_cycle.push_back(0);
 	mark_id[Stack_top] = (int)mark_cycle.size() - 1;
 	Case = 0; Draw_Operator[Stack_top++] = 4; 
@@ -796,7 +803,7 @@ void CGraphics_WorkView::OnDrawCycle()
 
 void CGraphics_WorkView::OnDrawFreeLine() 
 { 
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	// int top = (int)mark_freeline.size() - 1;
 	mark_freeline.push_back(0); Case = 0;
 	mark_id[Stack_top] = (int)mark_freeline.size() - 1;
@@ -807,7 +814,7 @@ void CGraphics_WorkView::OnDrawFreeLine()
 bool Not_Operator[10000];
 void CGraphics_WorkView::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	SetCapture();
 	CRect rc; GetWindowRect(&rc);
 	int cx = rc.Width(); int cy = rc.Height();
@@ -923,24 +930,24 @@ void CGraphics_WorkView::OnLButtonDown(UINT nFlags, CPoint point)
 		break;
 	case 18:
 		if (m_fivethreeone.Start) {
-			GLuint selectBuffer[100];//´æ·ÅÎïÌåÃû³ÆµÄÕ»
-			int hits;//´æ·Å±»Ñ¡ÖĞ¶ÔÏó¸öÊı
-			int viewport[4];//´æ·Å¿ÉÊÓÇø²ÎÊı
+			GLuint selectBuffer[100];//å­˜æ”¾ç‰©ä½“åç§°çš„æ ˆ
+			int hits;//å­˜æ”¾è¢«é€‰ä¸­å¯¹è±¡ä¸ªæ•°
+			int viewport[4];//å­˜æ”¾å¯è§†åŒºå‚æ•°
 			hits = 0;
 			m_fivethreeone.Change = true;
-			glGetIntegerv(GL_VIEWPORT, viewport); // »ñÈ¡µ±Ç°ÊÓ¿Ú×ø±ê²ÎÊı
-			glSelectBuffer(100, selectBuffer); // Ñ¡ÔñÃû³ÆÕ»´æ·Å±»Ñ¡ÖĞµÄÃû³Æ
-			glRenderMode(GL_SELECT); // ÉèÖÃµ±Ç°Îª Ñ¡ÔñÄ£Ê½
-			//³õÊ¼»¯Ãû³ÆÕ»
+			glGetIntegerv(GL_VIEWPORT, viewport); // è·å–å½“å‰è§†å£åæ ‡å‚æ•°
+			glSelectBuffer(100, selectBuffer); // é€‰æ‹©åç§°æ ˆå­˜æ”¾è¢«é€‰ä¸­çš„åç§°
+			glRenderMode(GL_SELECT); // è®¾ç½®å½“å‰ä¸º é€‰æ‹©æ¨¡å¼
+			//åˆå§‹åŒ–åç§°æ ˆ
 			glInitNames();
 			glPushName(0);
 			glMatrixMode(GL_PROJECTION);
 			glPushMatrix();
 			glLoadIdentity();
-			gluPickMatrix(point.x, viewport[3] - point.y, 10, 10, viewport);//´´½¨ÓÃÓÚÑ¡ÔñµÄÍ¶Ó°¾ØÕóÕ»
-			gluOrtho2D(0, cx, 0, cy);//ÉèÖÃÍ¶Ó°·½Ê½
+			gluPickMatrix(point.x, viewport[3] - point.y, 10, 10, viewport);//åˆ›å»ºç”¨äºé€‰æ‹©çš„æŠ•å½±çŸ©é˜µæ ˆ
+			gluOrtho2D(0, cx, 0, cy);//è®¾ç½®æŠ•å½±æ–¹å¼
 			//SendMessage(WM_PAINT, 0, 0);
-			m_fivethreeone.Draw(GL_SELECT); // »æÖÆ³¡¾°
+			m_fivethreeone.Draw(GL_SELECT); // ç»˜åˆ¶åœºæ™¯
 			glPopMatrix();
 			glFlush();
 			hits = glRenderMode(GL_RENDER);
@@ -976,7 +983,7 @@ void CGraphics_WorkView::OnLButtonDown(UINT nFlags, CPoint point)
 
 void CGraphics_WorkView::OnLButtonUp(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	//m_MouseDownPoint = CPoint(0, 0);
 	ReleaseCapture();
 	m_fivethreeone.ID = -1;
@@ -1030,12 +1037,12 @@ void CGraphics_WorkView::OnLButtonUp(UINT nFlags, CPoint point)
 
 void CGraphics_WorkView::OnMouseMove(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 
 	CRect rc; GetWindowRect(&rc);
 	int cx = rc.Width(); int cy = rc.Height();
 
-	//ÊµÊ±ÏÔÊ¾Êó±ê×ø±ê
+	//å®æ—¶æ˜¾ç¤ºé¼ æ ‡åæ ‡
 	/*CDC *pDc;
 	pDc = GetDC();
 	static CString str;
@@ -1044,7 +1051,7 @@ void CGraphics_WorkView::OnMouseMove(UINT nFlags, CPoint point)
 	int top;
 	if (GetCapture() == this && Case == 0 && Stack_top > 0) {
 
-		// IDC_ICON ÒşĞÎ ÏµÍ³×Ô¶¨ÒåÍ¼±ê
+		// IDC_ICON éšå½¢ ç³»ç»Ÿè‡ªå®šä¹‰å›¾æ ‡
 		/*HCURSOR hCur = LoadCursor(NULL, IDC_SIZE);
 		::SetCursor(hCur);*/
 
@@ -1176,7 +1183,7 @@ void CGraphics_WorkView::OnMouseMove(UINT nFlags, CPoint point)
 
 void CGraphics_WorkView::OnRButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	// SetCapture();
 	/*if (Case == 0) {
 		if (!Draw_Operator.empty()) {
@@ -1271,7 +1278,7 @@ void CGraphics_WorkView::OnRButtonDown(UINT nFlags, CPoint point)
 
 void CGraphics_WorkView::OnRButtonUp(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	// ReleaseCapture();
 	m_fivethreeone.ID = -1;
 	CView::OnRButtonUp(nFlags, point);
@@ -1280,7 +1287,7 @@ void CGraphics_WorkView::OnRButtonUp(UINT nFlags, CPoint point)
 
 void CGraphics_WorkView::OnTimer(UINT_PTR nIDEvent)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	switch (Case) {
 	case 1: 
 		break;
@@ -1376,7 +1383,7 @@ void CGraphics_WorkView::OnTimer(UINT_PTR nIDEvent)
 
 void CGraphics_WorkView::OnMButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	// SetCapture();
 	switch (Case) {
 	case 1:
@@ -1443,14 +1450,14 @@ void CGraphics_WorkView::OnMButtonDown(UINT nFlags, CPoint point)
 
 void CGraphics_WorkView::OnMButtonUp(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	// ReleaseCapture();
 	m_fivethreeone.ID = -1;
 	CView::OnMButtonUp(nFlags, point);
 }
 
 
-void CGraphics_WorkView::Clear() // Çå¿ÕÆäËüÍ¼ĞÎÑ§ÊµÑéµÄÉèÖÃ
+void CGraphics_WorkView::Clear() // æ¸…ç©ºå…¶å®ƒå›¾å½¢å­¦å®éªŒçš„è®¾ç½®
 {
 	for (int i = 1; i <= 22; i++) {
 		if (Case == i) 
@@ -1481,9 +1488,9 @@ void CGraphics_WorkView::Clear() // Çå¿ÕÆäËüÍ¼ĞÎÑ§ÊµÑéµÄÉèÖÃ
 			m_threethreeone.D_sun_to_earth = { 35, 0, 0 }, m_threethreeone.D_moon_to_earth = { 15, 0, 0 };
 			m_threethreeone.sun = { 0, 0, 0 }, m_threethreeone.earth = { 35, 0, 0 }, m_threethreeone.moon = { 50, 0, 0 };
 			m_threethreeone.Left = m_threethreeone.Right = false;
-			m_threethreeone.Angle_earth_to_sun = 0; // µØÇòÈÆÌ«ÑôµÄ¹«×ª½Ç¶È
-			m_threethreeone.Angle_moon_to_earth = 0; // ÔÂÁÁÈÆµØÇòµÄ¹«×ª½Ç¶È
-			m_threethreeone.Angle = 10; // ×Ô×ª½Ç¶È
+			m_threethreeone.Angle_earth_to_sun = 0; // åœ°çƒç»•å¤ªé˜³çš„å…¬è½¬è§’åº¦
+			m_threethreeone.Angle_moon_to_earth = 0; // æœˆäº®ç»•åœ°çƒçš„å…¬è½¬è§’åº¦
+			m_threethreeone.Angle = 10; // è‡ªè½¬è§’åº¦
 			break;
 		case 12:
 			KillTimer(1); KillTimer(2); KillTimer(3);
@@ -1519,7 +1526,7 @@ void CGraphics_WorkView::Clear() // Çå¿ÕÆäËüÍ¼ĞÎÑ§ÊµÑéµÄÉèÖÃ
 	}
 }
 
-void CGraphics_WorkView::Draw_Clear() // Çå¿Õ Ç°ÃæËù±£ÁôµÄÍ¼°¸
+void CGraphics_WorkView::Draw_Clear() // æ¸…ç©º å‰é¢æ‰€ä¿ç•™çš„å›¾æ¡ˆ
 {
 	while (!m_redo.Stack.empty()) {
 		m_redo.Stack.pop();
@@ -1550,7 +1557,7 @@ void CGraphics_WorkView::Draw_Clear() // Çå¿Õ Ç°ÃæËù±£ÁôµÄÍ¼°¸
 	mark_eraser.clear();
 	if (Stack_top - 1 >= 0) {
 		Draw_Operator[0] = Draw_Operator[Stack_top - 1];
-		Stack_top = 1; //Çå¿Õ ²»¿ÉÒÔ Çå¿ÕÑ¡Ôñ²Ù×÷£¬Ö»±£Áô×îºóÒ»¸ö
+		Stack_top = 1; //æ¸…ç©º ä¸å¯ä»¥ æ¸…ç©ºé€‰æ‹©æ“ä½œï¼Œåªä¿ç•™æœ€åä¸€ä¸ª
 		switch (Draw_Operator[0]) {
 		case 1:
 			mark_line.push_back(0);
@@ -1568,7 +1575,7 @@ void CGraphics_WorkView::Draw_Clear() // Çå¿Õ Ç°ÃæËù±£ÁôµÄÍ¼°¸
 
 void CGraphics_WorkView::OnDrawClear()
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Draw_Clear();
 	InvalidateRect(NULL, FALSE);
 }
@@ -1578,11 +1585,11 @@ vector<Point> ::iterator it;
 
 // bool mark_Operator[10000];
 
-void CGraphics_WorkView::OnUpdo() // Á½ÖÖ³·Ïú²Ù×÷ ¿ÉÑ¡Ôñ
+void CGraphics_WorkView::OnUpdo() // ä¸¤ç§æ’¤é”€æ“ä½œ å¯é€‰æ‹©
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	
-	//µÚÒ»ÖÖ£º³·Ïú²Ù×÷ ¿ÉÒÔ³·ÏúÍ¼ĞÎ ºÍ Ñ¡Ôñ²Ù×÷
+	//ç¬¬ä¸€ç§ï¼šæ’¤é”€æ“ä½œ å¯ä»¥æ’¤é”€å›¾å½¢ å’Œ é€‰æ‹©æ“ä½œ
 	/*int N;
 	if (Stack_top > 0) {
 		switch (Draw_Operator[Stack_top - 1]) {
@@ -1650,12 +1657,12 @@ void CGraphics_WorkView::OnUpdo() // Á½ÖÖ³·Ïú²Ù×÷ ¿ÉÑ¡Ôñ
 			break;
 		}
 	}*/
-	// ³·Ïú²Ù×÷Ö»¶ÔÍ¼ĞÎÓĞÓÃ£¬²»ÄÜ³·ÏúÑ¡Ôñ²Ù×÷
+	// æ’¤é”€æ“ä½œåªå¯¹å›¾å½¢æœ‰ç”¨ï¼Œä¸èƒ½æ’¤é”€é€‰æ‹©æ“ä½œ
 	bool IsDo = false;
 	int N, ID;
 	for (int i = Stack_top - 1; i >= 0 && !IsDo; i--) {
 		// if (mark_Operator[i]) continue;
-		ID = mark_id[i]; // ±ê¼Çµ±Ç°µÄ²Ù×÷ Î»ÓÚvectorÀïÃæµÄ ĞòºÅ
+		ID = mark_id[i]; // æ ‡è®°å½“å‰çš„æ“ä½œ ä½äºvectoré‡Œé¢çš„ åºå·
 		switch (Draw_Operator[i]) {
 		case 1:
 			N = (int)m_draw.Line_Pt.size();
@@ -1835,9 +1842,9 @@ void CGraphics_WorkView::OnUpdo() // Á½ÖÖ³·Ïú²Ù×÷ ¿ÉÑ¡Ôñ
 }
 
 
-void CGraphics_WorkView::OnRedo() // »Ö¸´²Ù×÷
+void CGraphics_WorkView::OnRedo() // æ¢å¤æ“ä½œ
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	int ID;
 	if (!m_redo.Stack.empty()) {
 		if (m_redo.Stack.empty()) return;
@@ -1936,10 +1943,10 @@ void CGraphics_WorkView::OnRedo() // »Ö¸´²Ù×÷
 	InvalidateRect(NULL, FALSE);
 }
 
-void CGraphics_WorkView::OnEraser() // ÏğÆ¤²Á²Ù×÷
+void CGraphics_WorkView::OnEraser() // æ©¡çš®æ“¦æ“ä½œ
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
-	if (Case) { // ÉÏÒ»½çÃæÊÇÍ¼ĞÎÑ§ÊµÑé ²»½øĞĞ²Ù×÷
+	// TODO:  åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
+	if (Case) { // ä¸Šä¸€ç•Œé¢æ˜¯å›¾å½¢å­¦å®éªŒ ä¸è¿›è¡Œæ“ä½œ
 		return;
 	}
 	mark_eraser.push_back(0);
@@ -1950,7 +1957,7 @@ void CGraphics_WorkView::OnEraser() // ÏğÆ¤²Á²Ù×÷
 
 void CGraphics_WorkView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	if (Case == 0) {
 		return;
 	}
@@ -2012,7 +2019,7 @@ void CGraphics_WorkView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 			}
 			break;
 		default:
-			MessageBox(_T("ÇëÑ¡ÔñÕıÈ·µÄ°´¼ü£¡"), _T("ÌáÊ¾"));
+			MessageBox(_T("è¯·é€‰æ‹©æ­£ç¡®çš„æŒ‰é”®ï¼"), _T("æç¤º"));
 			break;
 		}
 	}
@@ -2063,7 +2070,7 @@ void CGraphics_WorkView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 			}
 			break;
 		default:
-			MessageBox(_T("ÇëÑ¡ÔñÕıÈ·µÄ°´¼ü£¡"), _T("ÌáÊ¾"));
+			MessageBox(_T("è¯·é€‰æ‹©æ­£ç¡®çš„æŒ‰é”®ï¼"), _T("æç¤º"));
 			break; 
 		}
 	}
@@ -2073,14 +2080,14 @@ void CGraphics_WorkView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CGraphics_WorkView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	CView::OnKeyUp(nChar, nRepCnt, nFlags);
 }
 
-// ÊµÏÖ×éºÏ¼ü
+// å®ç°ç»„åˆé”®
 BOOL CGraphics_WorkView::PreTranslateMessage(MSG* pMsg)
 {
-	// TODO:  ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+	// TODO:  åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
 	if (Case) return FALSE;
 	static bool Ctrl = false;
 	if (pMsg->message == WM_KEYDOWN) {
@@ -2147,9 +2154,9 @@ void CGraphics_WorkView::ClearNow()
 			m_threethreeone.D_sun_to_earth = { 35, 0, 0 }, m_threethreeone.D_moon_to_earth = { 15, 0, 0 };
 			m_threethreeone.sun = { 0, 0, 0 }, m_threethreeone.earth = { 35, 0, 0 }, m_threethreeone.moon = { 50, 0, 0 };
 			m_threethreeone.Left = m_threethreeone.Right = false;
-			m_threethreeone.Angle_earth_to_sun = 0; // µØÇòÈÆÌ«ÑôµÄ¹«×ª½Ç¶È
-			m_threethreeone.Angle_moon_to_earth = 0; // ÔÂÁÁÈÆµØÇòµÄ¹«×ª½Ç¶È
-			m_threethreeone.Angle = 10; // ×Ô×ª½Ç¶È
+			m_threethreeone.Angle_earth_to_sun = 0; // åœ°çƒç»•å¤ªé˜³çš„å…¬è½¬è§’åº¦
+			m_threethreeone.Angle_moon_to_earth = 0; // æœˆäº®ç»•åœ°çƒçš„å…¬è½¬è§’åº¦
+			m_threethreeone.Angle = 10; // è‡ªè½¬è§’åº¦
 			break;
 		case 12:
 			KillTimer(1); KillTimer(2); KillTimer(3);
