@@ -109,10 +109,12 @@ HBRUSH CLogDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	// TODO:  在此更改 DC 的任何特性
 
-	// 设置背景图片 bmp格式
+	
 	static CBrush gBr;
 	static bool isInited = false;
-	if (!isInited)
+
+	// 设置背景图片 bmp格式
+	/*if (!isInited)
 	{
 		CBitmap bitmap;
 		bitmap.LoadBitmap(IDB_BITMAP2); // bmp图片的ID
@@ -120,7 +122,8 @@ HBRUSH CLogDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 		COLORREF clearColor = -1;
 		bitmap.DeleteObject();
 		isInited = true;
-	}
+	}*/
+	// 和背景图片 相融合
 	if (pWnd == this)
 	{
 		pDC->SetBkMode(TRANSPARENT);
@@ -131,7 +134,6 @@ HBRUSH CLogDialog::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 		pDC->SetBkMode(TRANSPARENT);
 		return   (HBRUSH)::GetStockObject(NULL_BRUSH); //其他控件使用透明背景
 	}
-
 
 	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
 	return hbr;
