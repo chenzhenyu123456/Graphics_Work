@@ -223,8 +223,8 @@ void CGraphics_WorkView::OnInitialUpdate()
 }
 
 
-bool CGraphics_WorkView::bSetDCPixelFormat() {
-	// 设置像素格式  
+bool CGraphics_WorkView::bSetDCPixelFormat()
+{
 	static PIXELFORMATDESCRIPTOR pfd =
 	{
 		sizeof(PIXELFORMATDESCRIPTOR), // 结构的大小  
@@ -245,10 +245,17 @@ bool CGraphics_WorkView::bSetDCPixelFormat() {
 		0, 0, 0 // 在此不使用  
 	};
 	// 选择一种与pfd所描述的最匹配的像素格式  
-	int nPixelFormat = ChoosePixelFormat(m_pDC->GetSafeHdc(), &pfd);
-	if (0 == nPixelFormat) return false;
 	// 为设备环境设置像素格式  
-	return SetPixelFormat(m_pDC->GetSafeHdc(), nPixelFormat, &pfd);
+	int pixelformat;
+	if ((pixelformat = ChoosePixelFormat(m_pDC->GetSafeHdc(), &pfd)) == 0) {
+		MessageBox(_T("ChoosePixelFormat failed"));
+		return FALSE;
+	}
+	if (SetPixelFormat(m_pDC->GetSafeHdc(), pixelformat, &pfd) == FALSE) {
+		MessageBox(_T("SetPixelFormat failed"));
+		return FALSE;
+	}
+	return TRUE;
 }
 
 OneOne m_oneone; // 1
