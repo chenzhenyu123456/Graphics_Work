@@ -303,6 +303,7 @@ vector<int> mark_eraser;
 int mark_id[100000];
 
 double Move_x, Move_y, Move_z;
+
 void CGraphics_WorkView::DrawPicture()
 {
 	// TODO:  在此添加命令处理程序代码
